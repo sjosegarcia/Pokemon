@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types>
+    <type id ="0" name ="???"/>
+    <type id ="1" name ="Normal">   
+        <weaknesses types ="Fighting"/>
+        <resistance types ="Ghost"/>            
+    </type>
+    <type id ="2" name ="Fighting"> 
+        <weaknesses types ="Flying,Psychic"/>
+        <resistance types ="Rock,Bug,Dark"/>            
+    </type>
+    <type id ="3" name ="Poison"> 
+        <weaknesses types ="Ground,Psychic"/>
+        <resistance types ="Fighting,Poison,Bug,Grass,Fairy"/>            
+    </type>
+	<type id ="4" name ="Ground"> 
+        <weaknesses types ="Water,Grass,Ice"/>
+        <resistance types ="Poison,Rock"/>
+        <immunities types ="Electric"/>            
+    </type>
+	<type id ="5" name ="Rock"> 
+        <weaknesses types ="Fighting,Ground,Steel,Water,Grass"/>
+        <resistance types ="Normal,Flying,Poison,Fire"/>            
+    </type>
+	<type id ="6" name ="Bug"> 
+        <weaknesses types ="Flying,Rock,Fire"/>
+        <resistance types ="Fighting,Ground,Grass"/>            
+    </type>
+    <type id ="7" name ="Ghost"> 
+        <weaknesses types ="Ghost,Dark"/>
+        <resistance types ="Poison,Bug"/>
+        <immunities types ="Normal,Fighting"/>
+    </type>
+    <type id ="8" name ="Steel"> 
+        <weaknesses types ="Fighting,Ground,Fire"/>
+        <resistance types ="Normal,Flying,Rock,Bug,Steel,Grass,Psychic,Ice,Dragon,Fairy"/>
+        <immunities types ="Poison"/>            
+    </type>
+    <type id ="9" name ="Fire"> 
+        <weaknesses types ="Ground,Rock,Water"/>
+        <resistance types ="Bug,Steel,Fire,Grass,Ice,Fairy"/>     
+    </type>
+    <type id ="10" name ="Water"> 
+        <weaknesses types ="Grass,Electric"/>
+        <resistance types ="Steel,Fire,Water,Ice"/>
+    </type>
+    <type id ="11" name ="Grass"> 
+        <weaknesses types ="Flying,Poison,Bug,Fire,Ice"/>
+        <resistance types ="Ground,Water,Grass,Electric"/>            
+    </type>
+    <type id ="12" name ="Electric"> 
+        <weaknesses types ="Ground"/>
+        <resistance types ="Flying,Steel,Electric"/>           
+    </type>
+    <type id ="13" name ="Psychic"> 
+        <weaknesses types ="Bug,Ghost,Dark"/>
+        <resistance types ="Fighting,Psychic"/>            
+    </type>
+    <type id ="14" name ="Ice"> 
+        <weaknesses types ="Fighting,Rock,Steel,Fire"/>
+        <resistance types ="Ice"/>           
+    </type>
+    <type id ="15" name ="Dragon"> 
+        <weaknesses types ="Ice,Dragon,Fairy"/>
+        <resistance types ="Fire,Water,Grass,Electric"/>           
+    </type>
+    <type id ="16" name ="Dark"> 
+        <weaknesses types ="Fighting,Bug,Fairy"/>
+        <resistance types ="Ghost,Dark"/>
+        <immunities types ="Psychic"/>            
+    </type>
+    <type id ="17" name ="Fairy"> 
+        <weaknesses types ="Poison,Steel"/>
+        <resistance types ="Fighting,Bug,Dark"/>
+        <immunities types ="Dark"/>            
+    </type>    
+    <type id ="18" name ="Shadow">
+        <resistance types ="Shadow"/>            
+    </type>
+</types>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Test" tilewidth="32" tileheight="32">
+  <image source="../imgs/Files/Outside_Tileset_WIP (1).png" width="256" height="12672"/>
+ </tileset>
+ <layer name="Ground" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKH7/qUHy6Hgqqmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqv8AX0MnEQ==
+  </data>
+ </layer>
+ <layer name="Vegitation" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2DsKwCAQBUDB+985bRA3CSH6UsyAjVjtw/XTGvClfhrkjDn0yWCfu3rLBEjQe/6nysP5nTHWWw5Zs7stWU/2hKz2qN5+1VrWqWp/Nc8ab/qTnpU11l8eef4SAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AF60AK8=
+  </data>
+ </layer>
+ <layer name="Trees" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2bENwkAQBEDXDBWQQh+EEJoMSuOzi5y9zXKakU7bwG7yvy7L8hq3NsgO3uM+TbKD57hHk+wgodezsoOEXttHSej1rOwgodf2URJ6/S95hNu46075673YX7mMuy/H95hte+1uKwEAEpzHnZpkBwn/SP6jSsI7xKzsIOEdwntGSej1rOwgodf2URJ6PSs7SOi1fZSEXs/KDhJ6bR8lodezsoOEXtsHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8E++rrE0pw==
+  </data>
+ </layer>
+ <layer name="Trees 2" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1VtrE0EYBuC9rXf1LrlL/lu9q/9PqwUPLXgErQrWA9RWf0ffQAbGZbdZ7UJzeB54IUwmk+H7ZnabBgCAdfQoeZwcJU+Sp8nxne5otz1LnicvkpfJSXJ6pzvaTAfJgxHWeZW8Tt4kb5N3yfsR1t01h8nD5efb9OZD8jE5Sz4ln5Mvt97dbip9GNqbveRea+xrcp58S74nP5KfyXT5/bQZz5hrraOuPtRjbfvJ/dbYRfIruUyukt/Jn2S+/H5eza3rudd097ceK/MnHWttm/Y9KH1Y9ezqquEq5Telnos67zd/97fUvh4r82et//2fPay7vvrfdD8Wuu5Il7pm7d8s6tx+9tRnv+uO1GsM3cMmGvLu6DuPN53TvprVd6V8njb9/av7NKnmTZrtUtd+1bujr7b/ck5LHbvO+XzgWrNq3mzg/26KuvarnlFj2OZnDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADALroGcRs10Q==
+  </data>
+ </layer>
+ <layer name="Trees 3" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bEJACAMBEDXsMz+S9paqCgKCt6VSYrwnxIAAAAA/C3ffuBTvdxj4oYz6nxnco/Bjn2xOG/t9POWUXcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALytAM/8AZc=
+  </data>
+ </layer>
+ <objectgroup name="Object Layer 1"/>
+</map>
