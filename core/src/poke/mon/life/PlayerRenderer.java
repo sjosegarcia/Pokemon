@@ -257,32 +257,4 @@ public class PlayerRenderer implements LifeHandler {
 		return position;
 	}
 
-	/*
-	 * public void update(float delta) { float overflowX = 0, overflowY = 0; if
-	 * (moving) { if (playerX != 0) { position.x += playerX * TILE_WIDTH *
-	 * (delta / MOVE_TIME); if ((playerX < 0 && position.x <= targetPosition.x)
-	 * || (playerX > 0 && position.x >= targetPosition.x)) { moving = false;
-	 * overflowX = playerX - targetPosition.x; } } else if (playerY != 0) {
-	 * position.y += playerY * TILE_HEIGHT * (delta / MOVE_TIME); if ((playerY <
-	 * 0 && position.y <= targetPosition.y) || (playerY > 0 && position.y >=
-	 * targetPosition.y)) { moving = false; overflowY = playerY -
-	 * targetPosition.y; } } System.out.println(position + "Overflow: " +
-	 * overflowX + "Target Position: " + targetPosition); }
-	 * 
-	 * if (!moving) { playerX = Gdx.input.isKeyPressed(Keys.A) ? -1 :
-	 * (Gdx.input.isKeyPressed(Keys.D) ? 1 : 0); playerY = playerX != 0 ? 0 :
-	 * (Gdx.input.isKeyPressed(Keys.W) ? 1 : (Gdx.input.isKeyPressed(Keys.S) ?
-	 * -1 : 0));
-	 * 
-	 * if (playerX != 0 || playerY != 0) { moving = true; targetPosition.x =
-	 * position.x + (playerX * TILE_WIDTH); targetPosition.y = position.y +
-	 * playerY * TILE_HEIGHT;
-	 * 
-	 * if (overflowX != 0 && targetPosition.x != position.x) { if
-	 * (Math.abs(overflowX) > 0.001f) { update(delta * (overflowX / (TILE_WIDTH
-	 * * (delta / MOVE_TIME)))); } } else if (overflowY != 0 && targetPosition.y
-	 * != position.y) { if (Math.abs(overflowY) > 0.001f) { update(delta *
-	 * (overflowY / (TILE_HEIGHT * (delta / MOVE_TIME)))); } } } } }
-	 */
-
 }

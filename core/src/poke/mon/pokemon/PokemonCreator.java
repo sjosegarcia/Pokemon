@@ -2,7 +2,7 @@ package poke.mon.pokemon;
 
 import java.util.EnumMap;
 
-public class PokemonCreator {
+public class PokemonCreator {//TODO should I make the class and the variables defined in this class a final, to avoid any value changing?
 
 	private int id;
 	private PokemonTypes[] type;
@@ -30,29 +30,6 @@ public class PokemonCreator {
 	private String[] compatibility;
 	
 	public PokemonCreator() {}
-	
-	public PokemonCreator(String pokemonName, PokemonTypes[] type, String genderRate, String growthRate,
-			int baseExp, EnumMap<PokemonStats, Integer> ev, int rareness, int happiness, PokemonAbilities[] ability, PokemonAbilities hiddenAbility, int numStepsToHatch,
-			float height, float weight, String color, String habitat, int pokedexId, String species, String pokedexDescription, int playerY, int enemyY, int altitude) {
-		this.pokedexId = pokedexId;
-		this.name = pokemonName;
-		this.type = type;
-		this.genderRate = genderRate;
-		this.growthRate = growthRate;
-		this.baseExp = baseExp;
-		this.ev = ev;
-		this.rareness = rareness;
-		this.happiness = happiness;
-		this.ability = ability;
-		this.hiddenAbility = hiddenAbility;
-		this.numStepsToHatch = numStepsToHatch;
-		this.height= height;
-		this.weight = weight;
-		this.color = color;
-		this.habitat = habitat;
-		this.species = species;
-		this.pokedexDescription = pokedexDescription;
-	}	
 	
 	public PokemonTypes[] getType() {
 		return type;

@@ -1,7 +1,7 @@
 package poke.mon.game.desktop;
 
 import poke.mon.constants.Constants;
-import poke.mon.game.Pokemon;
+import poke.mon.game.Game;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -13,6 +13,6 @@ public class DesktopLauncher {
 		config.resizable = Constants.resizable;
 		config.width = Constants.width;
 		config.height = Constants.height;
-		new LwjglApplication(new Pokemon(), config);
+		new LwjglApplication(new Game(), config);
 	}
 }

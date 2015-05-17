@@ -23,6 +23,16 @@ public class PokemonLoader {
 		<uncommon />
 		<common />
 		<rare />
+		
+		<evolution name="LOMBRE" condition="Level" value="14"/>
+		<evolution name="VAPOREON" condition="Item" value="WATERSTONE"/>
+		<evolution name="JOLTEON" condition="Item" value="THUNDERSTONE"/>
+		<evolution name="FLAREON" condition="Item" value="FIRESTONE"/>
+		<evolution name="LEAFEON" condition="Location" value="28"/>
+		<evolution name="GLACEON" condition="Location" value="34"/>
+		<evolution name="ESPEON" condition="HappinessDay" value=""/>
+		<evolution name="UMBREON" condition="HappinessNight"/>
+		
 	 * */
 	private static ArrayList<PokemonCreator> pokedex = new ArrayList<PokemonCreator>();
 	private XmlReader reader = new XmlReader();
@@ -78,7 +88,7 @@ public class PokemonLoader {
 					int index = 0;
 					for (Element e : elemen) {
 						for (PokemonAbilities pa : PokemonAbilityLoader.getInstance()) {
-							if (pa.getName().contains(e.getChildByName("ability").getAttribute("value"))) {
+							if (pa.getName().equalsIgnoreCase(e.getChildByName("ability").getAttribute("value"))) {
 								abilList[index] = pa;
 								index++;
 							}
@@ -88,7 +98,7 @@ public class PokemonLoader {
 				}
 				if (pokemons.getChildByName("hidden") != null) {
 					for (PokemonAbilities pa : PokemonAbilityLoader.getInstance()) {
-						if (pa.getName().contains(pokemons.getChildByName("hidden").getAttribute("value"))) {
+						if (pa.getName().equalsIgnoreCase(pokemons.getChildByName("hidden").getAttribute("value"))) {
 							pokemon.setHiddenAbility(pa);
 						}
 					}
@@ -140,6 +150,19 @@ public class PokemonLoader {
 	
 	public static Collection<PokemonCreator> getInstance() {
 		return Collections.unmodifiableCollection(pokedex);
+	}
+	
+	public static PokemonCreator getPokemonById(int id) {
+		return pokedex.get(id-1);
+	}
+	
+	public static PokemonCreator getPokemonByName(String name) {
+		for (PokemonCreator pokemon : pokedex) {
+			if (pokemon.getName().equalsIgnoreCase(name)) {
+				return pokemon;
+			}
+		}
+		return null;
 	}
 	
 }
