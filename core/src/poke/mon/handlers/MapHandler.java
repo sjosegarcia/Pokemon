@@ -81,11 +81,11 @@ public class MapHandler implements Handlers {
 	}
 	
 	public int getWidth() {
-		return (Integer) mapProps.get("width")*Constants.pixel;
+		return (Integer) mapProps.get("width")*Constants.units;
 	}
 
 	public int getHeight() {
-		return (Integer) mapProps.get("height")*Constants.pixel;
+		return (Integer) mapProps.get("height")*Constants.units;
 	}
 	
 	public int getTileWidth() {
@@ -112,13 +112,13 @@ public class MapHandler implements Handlers {
 	}
 
 	public void addMapObject(LifeHandler life) {
-		life.setMap(this);
-		float checkWidth = life.getTexture().getWidth() / (Constants.pixel / 2);
+		float checkWidth = life.getTexture().getWidth() / (Constants.units / 2);
 		float offsetX = 0;
-		if (checkWidth >= (Constants.pixel / 2)-1) { //TODO this is for now, until I can find a better way.
+		if (checkWidth >= (Constants.units / 2)-1) { //TODO this is for now, until I can find a better way.
 			offsetX-= checkWidth;
 		}
-		life.getPosition().set(-x + offsetX, -y);
+	//	life.getPosition().set(-x + offsetX, -y);
+	//	life.getTargetPosition().set(life.getPosition());
 		life.getBounds().set(x + (viewport.getWorldWidth() / 2) , y + (viewport.getWorldHeight() / 2), life.getLifeFrame().getRegionWidth(), life.getLifeFrame().getRegionHeight());
 		mapObjects.addMapObject(life);
 	}

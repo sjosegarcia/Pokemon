@@ -1,10 +1,5 @@
 package poke.mon.life;
 
-import poke.mon.constants.Constants;
-import poke.mon.handlers.LifeHandler;
-import poke.mon.handlers.MapHandler;
-import poke.mon.handlers.MovementHandler.Movement;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,30 +9,33 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import poke.mon.constants.Constants;
+import poke.mon.handlers.LifeHandler;
+import poke.mon.handlers.MapHandler;
 
 public class PlayerRenderer implements LifeHandler {
 
 	private Texture texture;
 	private int columns = 4, rows = 4;
 	private TextureRegion[][] textureRegion;
-	private TextureRegion[] frames = new TextureRegion[rows * columns];
+	private TextureRegion[] frames;
 	private TextureRegion currentFrame;
 	private Animation animation;
 	private String player;
-	private MapHandler map;
 	private Rectangle bounds;
-	private CollisionDetection cd;
 	private int moveAnimation;
 	private int currentDirection;
-	private Vector2 targetPosition = new Vector2();
+	private Vector2 targetPosition;
 	private boolean isX = false;
 	private boolean isY = false;
-	private float timer = 0;
-	private Vector2 position = new Vector2();
-	private int xOffset, yOffset;
-	private boolean cannotMove = false;
-
+	private Vector2 position;
+	private float speed = .01f;
+	
+	
 	public PlayerRenderer(String player) {
+		frames = new TextureRegion[rows * columns];
+		targetPosition = new Vector2();
+		position = new Vector2();
 		this.player = player;
 		try {
 			texture = new Texture(Gdx.files.internal("players/" + this.player).toString());
@@ -58,13 +56,50 @@ public class PlayerRenderer implements LifeHandler {
 		position.set(0, 0);
 		targetPosition.set(0, 0);
 	}
-
-	public void draw(Batch batch, float delta) {
-		timer += delta;
+	
+	public void draw(Batch batch, MapHandler map) {
 		movement();
+		position.lerp(targetPosition, speed);
+		System.out.println(targetPosition);
+		map.getCamera().position.set(getX(), getY(), 0);
+		map.getCamera().update();
+		batch.setProjectionMatrix(map.getCamera().combined);
+		currentFrame = animation.getKeyFrame(currentDirection + moveAnimation, true);
+		batch.draw(currentFrame, getX(), getY());
+	}
+	
+	@Override
+	public void movement() {
+			//System.out.println(position);
+		if (hasTranslated()) {
+			System.out.println("ASAAS");
+			isX = false;
+			isY = false;
+		}
+		if (Gdx.input.isKeyPressed(Keys.D)) {
+			targetPosition.x = (float) Math.floor(position.x + Constants.units);
+			currentDirection = MovementHandler.RIGHT.getDirection();
+			isX = true;
+		} else if (Gdx.input.isKeyPressed(Keys.A)) {
+			targetPosition.x = (float) Math.floor(position.x - Constants.units);
+			currentDirection = MovementHandler.LEFT.getDirection();
+			isX = true;
+		}		
+	}
+
+	/*
+ 	public void draw(Batch batch, float delta) {
+		timer += delta;
+		movement(delta);
 		if (!targetPosition.equals(position)) {
 			if (translatingX()) {
-				position.set((float) (getX() + ((xOffset / Constants.pixel) * 1)), getY());
+				position.set((float) (getX() + ((xOffset / Constants.pixel) * (Constants.pixel * 2)) * delta), getY());
+				if (position.x > targetPosition.x && xOffset > 0) {
+					position.x = targetPosition.x;
+				}
+				if (position.x < targetPosition.x && xOffset < 0) {
+					position.x = targetPosition.x;
+				}
 			}
 			if (translatingY()) {
 				position.set(getX(), (float) (getY() + ((yOffset / Constants.pixel) * 1)));
@@ -73,25 +108,17 @@ public class PlayerRenderer implements LifeHandler {
 		if (moveAnimation < 0 || moveAnimation > 3) {
 			moveAnimation = 0;
 		}
-
 		map.getCamera().position.set(getX(), getY(), 0);
 		map.getCamera().update();
 		batch.setProjectionMatrix(map.getCamera().combined);
-		currentFrame = animation.getKeyFrame(currentDirection + moveAnimation,
-				true);
+		currentFrame = animation.getKeyFrame(currentDirection + moveAnimation, true);
 		batch.draw(currentFrame, getX(), getY());
 	}
-
+	
 	@Override
-	public void movement() {
-		/* TODO Fix the logic where if the player is
-		// holding down the movement button, that it
-		// will wait until the idle frame finishes
-		// rendering and displays for a couple of
-		// miliseconds before firing off the new render */
+	public void movement(float delta) {
 		if (isTranslating()) {
-			cannotMove = true;
-			return;
+		//	return;
 		}
 		if (hasTranslated()) {
 			isX = false;
@@ -99,43 +126,42 @@ public class PlayerRenderer implements LifeHandler {
 			if (moveAnimation % 2 == 1) {
 				moveAnimation++;
 			}
-			System.out.println(timer);
-		}
-		if (cannotMove) {
-			if (timer >= 1) {// .53)
-				cannotMove = false;
-			}
-			// return;
 		}
 		xOffset = 0;
 		yOffset = 0;
-		timer = 0;
+		if (timer < .5) {
+			//return;
+		}
 		if (isIdleFrame()) {
+			//System.out.println(timer);
+			timer = 0;
 			if (Gdx.input.isKeyPressed(Keys.W)) {
 				currentDirection = Movement.goUp();
 				yOffset += Constants.pixel;
 				isY = true;
-				moveAnimation++;
+			//	moveAnimation++;
 			} else if (Gdx.input.isKeyPressed(Keys.A)) {
 				currentDirection = Movement.goLeft();
 				xOffset -= Constants.pixel;
 				isX = true;
-				moveAnimation++;
-			} else if (Gdx.input.isKeyPressed(Keys.S)) {
+				//moveAnimation++;
+			}else if (Gdx.input.isKeyPressed(Keys.S)) {
 				currentDirection = Movement.goDown();
 				yOffset -= Constants.pixel;
 				isY = true;
-				moveAnimation++;
+			//	moveAnimation++;
 			} else if (Gdx.input.isKeyPressed(Keys.D)) {
 				currentDirection = Movement.goRight();
 				xOffset += Constants.pixel;
 				isX = true;
-				moveAnimation++;
+				//moveAnimation++;
 			}
 			targetPosition.set(getX() + xOffset, getY() + yOffset);
 		}
 	}
-
+*/
+	
+	
 	@Override
 	public boolean translatingX() {
 		return isX && (targetPosition.x != getX());
@@ -182,39 +208,28 @@ public class PlayerRenderer implements LifeHandler {
 	}
 
 	@Override
-	public void setMap(MapHandler map) {
-		this.map = map;
-		cd = new CollisionDetection(this);
-	}
-
-	@Override
-	public MapHandler getMap() {
-		return map;
-	}
-
-	@Override
 	public TextureRegion getLifeFrame() {
 		return currentFrame;
 	}
 
 	@Override
 	public boolean isFacingDown() {
-		return currentDirection == Movement.goDown();
+		return currentDirection == MovementHandler.DOWN.getDirection();
 	}
 
 	@Override
 	public boolean isFacingLeft() {
-		return currentDirection == Movement.goLeft();
+		return currentDirection == MovementHandler.LEFT.getDirection();
 	}
 
 	@Override
 	public boolean isFacingRight() {
-		return currentDirection == Movement.goRight();
+		return currentDirection == MovementHandler.RIGHT.getDirection();
 	}
 
 	@Override
 	public boolean isFacingUp() {
-		return currentDirection == Movement.goUp();
+		return currentDirection == MovementHandler.UP.getDirection();
 	}
 
 	@Override
@@ -256,5 +271,28 @@ public class PlayerRenderer implements LifeHandler {
 	public Vector2 getPosition() {
 		return position;
 	}
+	
+	@Override
+	public Vector2 getTargetPosition() {
+		return targetPosition;
+	}
 
+	public enum MovementHandler {
+
+		DOWN(0),
+		LEFT(4),
+		RIGHT(8),
+		UP(12);
+		
+		private int direction;
+		
+		private MovementHandler(int direction) {
+			this.direction = direction;
+		}
+		
+		public int getDirection() {
+			return direction;
+		}
+	}	
+	
 }

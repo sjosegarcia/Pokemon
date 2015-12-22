@@ -2,7 +2,7 @@ package poke.mon.pokemon;
 
 import java.util.EnumMap;
 
-public class PokemonCreator {//TODO should I make the class and the variables defined in this class a final, to avoid any value changing?
+public class PokemonCreator {
 
 	private int id;
 	private PokemonTypes[] type;

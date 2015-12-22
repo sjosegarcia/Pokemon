@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.XmlReader.Element;
 
 public class PokemonLoader {
 	/*TODO
-	 * add gender rate (convert it from a string to something else in the xml)
 	 * Parse moves and eggMoves
 	 * parse items :
 		<uncommon />
@@ -58,17 +57,23 @@ public class PokemonLoader {
 						types[i] = PokemonTypes.UNKOWN.getTypeByString(modify[i]);
 					}
 					pokemon.setTypes(types);
-				}			
+				}
 				if (pokemons.getChildByName("stats").getAttribute("value") != null) {
 					values = pokemons.getChildByName("stats").getAttribute("value");
 					modify = values.split(",");
 					for (int i = 0; i < modify.length; i++) {
 						pokemon.getEv().put(PokemonStats.UNKNOWN.getStat(i), Integer.parseInt(modify[i]));
 					}
-				}				
+				}
+				if (pokemons.getChildByName("gender") != null) {
+					pokemon.setGenderRate(pokemons.getChildByName("gender").getAttribute("value"));
+				}
+				if (pokemons.getChildByName("growthrate").getAttribute("value") != null) {
+					pokemon.setGrowthRate(pokemons.getChildByName("growthrate").getAttribute("value"));
+				}	
 				if (pokemons.getChildByName("experience").getAttribute("value") != null) {
 					pokemon.setBaseExp(Integer.parseInt(pokemons.getChildByName("experience").getAttribute("value")));
-				}				
+				}	
 				if (pokemons.getChildByName("effortpoints").getAttribute("value") != null) {
 					values = pokemons.getChildByName("effortpoints").getAttribute("value");
 					modify = values.split(",");
@@ -129,14 +134,14 @@ public class PokemonLoader {
 				}
 				if (pokemons.getChildByName("species").getAttribute("value") != null) {
 					pokemon.setSpecies(pokemons.getChildByName("species").getAttribute("value"));
-				}			
+				}
 				if (pokemons.getChildByName("positions") != null) {
 					if (pokemons.getChildByName("positions").getAttribute("friendY") != null) {
 						pokemon.setPlayerY(Integer.parseInt(pokemons.getChildByName("positions").getAttribute("friendY")));
 					}
 					if (pokemons.getChildByName("positions").getAttribute("foeY") != null) {
 						pokemon.setEnemyY(Integer.parseInt(pokemons.getChildByName("positions").getAttribute("foeY")));
-					}					
+					}
 					if (pokemons.getChildByName("positions").getAttribute("foeAltitude") != null) {
 						pokemon.setAltitude(Integer.parseInt(pokemons.getChildByName("positions").getAttribute("foeAltitude")));
 					}

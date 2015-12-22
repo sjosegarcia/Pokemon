@@ -8,9 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public interface LifeHandler {
 	
-	public void draw(Batch batch, float delta);
-	public void setMap(MapHandler map);
-	public MapHandler getMap();
+	public void draw(Batch batch, MapHandler map);
 	public TextureRegion getLifeFrame();
 	public void movement();
 	public void dispose();
@@ -34,4 +32,5 @@ public interface LifeHandler {
 	public void setX(float x);
 	public void setY(float y);
 	public Vector2 getPosition();
+	public Vector2 getTargetPosition();
 }

@@ -2,10 +2,11 @@ package poke.mon.game;
 
 import poke.mon.constants.Constants;
 import poke.mon.handlers.MapHandler;
-import poke.mon.life.PlayerRenderer;
 import poke.mon.loader.PokemonAbilityLoader;
 import poke.mon.loader.PokemonLoader;
 import poke.mon.loader.PokemonTypeLoader;
+import poke.mon.pokemon.Pokemon;
+import poke.mon.trainer.PokemonTrainer;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -15,24 +16,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Game extends ApplicationAdapter {
 	
 	private MapHandler map;
-	private PlayerRenderer player;
 	private SpriteBatch batch;
+	private PokemonTrainer trainer;
 	
 	@Override
 	public void create() {
+		new PokemonTypeLoader();
+		new PokemonAbilityLoader();
+		new PokemonLoader();
 		batch = new SpriteBatch();
 		map = new MapHandler("test2.tmx");
-		player = new PlayerRenderer("red.png");
-		player.setMap(map);
-		map.addMapObject(player);
-		PokemonTypeLoader type = new PokemonTypeLoader();
-		PokemonAbilityLoader abilities = new PokemonAbilityLoader();
-		PokemonLoader pl = new PokemonLoader();
+		trainer = new PokemonTrainer("red.png");
+		map.addMapObject(trainer);
+		Pokemon p = new Pokemon(4, 1);
+		System.out.println(p.toString());
 	}
 
 	@Override
 	public void render() {
-		float delta = Gdx.graphics.getDeltaTime();
 		Gdx.graphics.setTitle(Constants.gameName + " FPS: " + Gdx.graphics.getFramesPerSecond());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(0, 0, 0, 0);
@@ -40,14 +41,14 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glEnable(GL20.GL_BLEND);
 		map.update();
 		batch.begin();
-		player.draw(batch, delta);
+		trainer.draw(batch, map);
 		batch.end();
 	}
 	
 	@Override
 	public void dispose() {
 		map.dispose();
-		player.dispose();
+		trainer.dispose();
 	}
 		
 	@Override

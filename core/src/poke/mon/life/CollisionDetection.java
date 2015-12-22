@@ -19,7 +19,7 @@ public class CollisionDetection {
 	}
 	
 	public CollisionDetection(PlayerRenderer player) {
-		this.map = player.getMap();
+	//	this.map = player.getMap();
 		this.player = player;
 	}
 	/*

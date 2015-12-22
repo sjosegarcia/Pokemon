@@ -1,23 +1,39 @@
 package poke.mon.trainer;
 
-public class PokemonPokedex {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-	private int seen = 0;
-	private int own = 0;
+import poke.mon.pokemon.Pokemon;
+
+public class PokemonPokedex {
+	
+	private List<Pokemon> seen = new ArrayList<Pokemon>();
+	private List<Pokemon> owned = new ArrayList<Pokemon>();
 	
 	public PokemonPokedex() {}
 	
-	public int getSeen() {
-		return seen;
-	}
-	public void setSeen(int seen) {
-		this.seen = seen;
-	}
-	public int getOwn() {
-		return own;
-	}
-	public void setOwn(int own) {
-		this.own = own;
+	public List<Pokemon> getSeen() {
+		return Collections.unmodifiableList(seen);
 	}
 	
+	public List<Pokemon> getOwned() {
+		return Collections.unmodifiableList(owned);
+	}
+	
+	public boolean addOwned(Pokemon pokemon) {
+	/*	if (owned.contains(pokemon)) {
+			return false;
+		}*/
+		return owned.add(pokemon);
+	}	
+	
+	public boolean addSeen(Pokemon pokemon) {
+		for (Pokemon p : seen) {
+			if (p.getData().getPokedexId() == pokemon.getData().getPokedexId()) {
+				return false;
+			}
+		}
+		return seen.add(pokemon);
+	}	
 }

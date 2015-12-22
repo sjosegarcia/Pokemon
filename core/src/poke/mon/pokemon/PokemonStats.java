@@ -1,6 +1,6 @@
 package poke.mon.pokemon;
 
-public enum PokemonStats { //http://bulbapedia.bulbagarden.net/wiki/Individual_values http://bulbapedia.bulbagarden.net/wiki/Effort_values
+public enum PokemonStats {//hp atk def spatk spdef speed
 	UNKNOWN(-1),
 	HP(0),
 	ATTACK(1),

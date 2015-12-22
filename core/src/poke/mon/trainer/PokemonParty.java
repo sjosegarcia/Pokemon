@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import poke.mon.constants.Constants;
 import poke.mon.pokemon.Pokemon;
 
 public class PokemonParty {
@@ -18,7 +19,7 @@ public class PokemonParty {
 	}
 	
 	public boolean addPokemon(Pokemon pokemon) {
-		if (party.size() == 6) {
+		if (party.size() == Constants.partySize) {
 			return false;
 		}
 		return party.add(pokemon);
@@ -37,14 +38,14 @@ public class PokemonParty {
 	
 	public void removePokedexId(int pokemonId) {
 		for (Pokemon pokemon : party) {
-			if (pokemon.getPokemon().getPokedexId() == pokemonId) {
+			if (pokemon.getData().getPokedexId() == pokemonId) {
 				party.remove(party.indexOf(pokemon));
 			}
 		}
 	}
 	
 	public boolean isFull() {
-		return party.size() == 6;
+		return party.size() == Constants.partySize;
 	}
 	
 	public void clearParty() {
